@@ -1,0 +1,331 @@
+
+.dragger {
+    position: relative;
+    margin: auto;
+    padding: 10px;
+    padding-bottom: 20px;
+}
+
+.data-table {
+    position: relative;
+    padding-top: 20px;
+}
+
+.search-box, .search-wrapper {
+    position: relative;
+    padding: 10px;
+  }
+  
+.search-wrapper {
+      width: 500px;
+      margin: auto;
+      margin-top: 50px;
+  }
+.search-box {
+    width: 80%;
+    border: 1px solid #ccc;
+    outline: 0;
+    border-radius: 15px;
+}
+
+.custom-button {
+    position: relative;
+}
+
+.arrange-items {
+	margin-left: 50px;
+	margin-right: 50px;
+	font-size: 2em;
+}
+
+
+$emoji-base-color: #FFDA6A;
+$emoji-like-color: #548DFF;
+$emoji-love-color: #F55064;
+$emoji-angry-color: #D5234C;
+$emoji-white-color: #FFFFFF;
+$emoji-black-color: #000000;
+$emoji-text-color: #8A8A8A;
+
+body {
+  margin: 0;
+  width: 1200px;
+  max-width: 100%;
+  text-align: center;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.emoji {
+	width: 120px;
+	height: 120px;
+	margin: 15px 15px 40px;
+	background: $emoji-base-color;
+	display: inline-block;
+	border-radius: 50%;
+	position: relative;
+  
+	&:after {
+		position: absolute;
+		bottom: -40px;
+		font-size: 18px;
+		width: 60px;
+		left: calc(50% - 30px);
+		color: $emoji-text-color;  
+	}
+}
+
+.emoji__face, .emoji__eyebrows, .emoji__eyes, .emoji__mouth, .emoji__tongue, .emoji__heart, .emoji__hand, .emoji__thumb {
+	position: absolute;
+	
+	&:before, &:after {
+		position: absolute;
+		content: '';
+	}  
+}
+
+.emoji__face {
+	width: inherit;
+	height: inherit;
+}
+
+.emoji--haha {
+	&:after {
+		content: 'Tích cực';
+	}
+
+	.emoji__face {
+		animation: haha-face 2s linear infinite;
+	}
+  
+	.emoji__eyes {
+		width: 26px;
+		height: 6px;
+		border-radius: 2px;
+		left: calc(50% - 13px);
+		top: 35px;
+		transform: rotate(20deg);
+		background: transparent;
+		box-shadow: -25px 5px 0 0 $emoji-black-color,  25px -5px 0 0 $emoji-black-color;
+	  
+		&:after {
+		  left: 0;
+		  top: 0;
+		  width: 26px;
+		  height: 6px;
+		  border-radius: 2px;
+		  transform: rotate(-40deg);
+		  background: transparent;
+		  box-shadow: -25px -5px 0 0 $emoji-black-color,  25px 5px 0 0 $emoji-black-color;
+		}
+	}
+  
+	.emoji__mouth {
+		width: 80px;
+		height: 40px;
+		left: calc(50% - 40px);
+		top: 50%;
+		background: $emoji-black-color;
+		border-radius: 0 0 40px 40px;
+		overflow: hidden;
+		z-index: 1;  
+		animation: haha-mouth 2s linear infinite;
+	}
+ 
+	.emoji__tongue {
+		width: 70px;
+		height: 30px;
+		background: $emoji-love-color;
+		left: calc(50% - 35px);
+		bottom: -10px;
+		border-radius: 50%;  
+	}  
+}
+
+.emoji--sad {
+	&:after {
+		content: 'Tiêu cực';
+	}
+
+	.emoji__face {
+		animation: sad-face 2s ease-in infinite;
+	}
+  
+	.emoji__eyebrows {
+		left: calc(50% - 3px);
+		top: 35px;
+		height: 6px;
+		width: 6px;
+		border-radius: 50%;
+		background: transparent;
+		box-shadow: -40px 9px 0 0 $emoji-black-color, -25px 0 0 0 $emoji-black-color, 25px 0 0 0 $emoji-black-color, 40px 9px 0 0 $emoji-black-color, ;
+		
+		&:before, &:after {
+			width: 30px;
+			height: 20px;
+			border: 6px solid $emoji-black-color;
+			box-sizing: border-box;
+			border-radius: 50%;
+			border-bottom-color: transparent;
+			border-left-color: transparent;
+			border-right-color: transparent;
+			top: 2px;
+			left: calc(50% - 15px);  
+		}
+
+		&:before {
+			margin-left: -30px;
+			transform: rotate(-30deg);  
+		}
+
+		&:after {
+			margin-left: 30px;
+			transform: rotate(30deg);
+		}
+	}
+  
+	.emoji__eyes {
+		width: 14px;
+		height: 16px;
+		left: calc(50% - 7px);
+		top: 50px;
+		border-radius: 50%;
+		background: transparent;
+		box-shadow: 25px 0 0 0 $emoji-black-color, -25px 0 0 0 $emoji-black-color;
+
+		&:after {
+			background: $emoji-like-color;
+			width: 12px;
+			height: 12px;
+			margin-left: 6px;
+			border-radius: 0 100% 40% 50% / 0 50% 40% 100%;
+			transform-origin: 0% 0%;
+			animation: tear-drop 2s ease-in infinite;
+		}  
+	}
+  
+	.emoji__mouth {
+		width: 60px;
+		height: 80px;
+		left: calc(50% - 30px);
+		top: 80px;
+		box-sizing: border-box;
+		border: 6px solid $emoji-black-color;  
+		border-radius: 50%;
+		border-bottom-color: transparent;
+		border-left-color: transparent;
+		border-right-color: transparent;
+		background: transparent;
+		animation: sad-mouth 2s ease-in infinite;
+
+		&:after {
+			width: 6px;
+			height: 6px;
+			background: transparent;
+			border-radius: 50%;
+			top: 4px;
+			left: calc(50% - 3px);
+			box-shadow: -18px 0 0 0 $emoji-black-color, 18px 0 0 0 $emoji-black-color;  
+		}  
+	}
+}
+
+@keyframes haha-face {
+	10%, 30%, 50% {transform: translateY(25px);}
+	20%, 40% {transform: translateY(15px);}
+	60%, 80% {transform: translateY(0);}
+	70%, 90% {transform: translateY(-10px);}
+}
+
+@keyframes haha-mouth {
+	10%, 30%, 50% {transform: scale(0.6); top: 45%;}
+	20%, 40% {transform: scale(0.8); top: 45%;}
+	60%, 80% {transform: scale(1); top: 50%;}
+	70% {transform: scale(1.2); top: 50%;}
+	90% {transform: scale(1.1); top: 50%;}
+}
+
+@keyframes sad-face {
+	25%, 35% {top: -15px;}
+	55%, 95% {top: 10px;}
+	100%, 0% {top: 0;}
+}
+
+@keyframes sad-mouth {
+	25%, 35% {transform: scale(0.85); top: 70px;}
+	55%, 100%, 0% {transform: scale(1); top:80px;}
+}
+
+@keyframes tear-drop {
+	0%, 100% {display:block; left: 35px; top: 15px; transform: rotate(45deg) scale(0);}
+	25% {display:block; left: 35px; transform: rotate(45deg) scale(2);}
+	49.9% {display:block; left: 35px; top: 65px; transform: rotate(45deg) scale(0);}
+	50% {display:block; left: -35px; top: 15px; transform: rotate(45deg) scale(0);}
+	75% {display:block; left: -35px; transform: rotate(45deg) scale(2);}
+	99.9% {display:block; left: -35px; top: 65px; transform: rotate(45deg) scale(0);}
+}
+
+@keyframes hands-up {
+	25% {transform: rotate(15deg);}
+	50% {transform: rotate(-15deg) translateY(-10px);}
+	75%, 100% {transform: rotate(0deg);}
+}
+
+@keyframes thumbs-up {
+	25% {transform: rotate(20deg);}
+	50%, 100% {transform: rotate(5deg);}
+}
+
+//Spinner
+
+// body {
+// 	display: flex;
+// 	align-items: center;
+// 	justify-content: center;
+//  }
+ 
+ // Here is where the magic happens
+ 
+ $offset: 187;
+ $duration: 1.4s;
+ 
+ .spinner {
+   animation: rotator $duration linear infinite;
+ }
+ 
+ @keyframes rotator {
+   0% { transform: rotate(0deg); }
+   100% { transform: rotate(270deg); }
+ }
+ 
+ .path {
+   stroke-dasharray: $offset;
+   stroke-dashoffset: 0;
+   transform-origin: center;
+   animation:
+	 dash $duration ease-in-out infinite, 
+	 colors ($duration*4) ease-in-out infinite;
+ }
+ 
+ @keyframes colors {
+	 0% { stroke: #4285F4; }
+	 25% { stroke: #DE3E35; }
+	 50% { stroke: #F7C223; }
+	 75% { stroke: #1B9A59; }
+   100% { stroke: #4285F4; }
+ }
+ 
+ @keyframes dash {
+  0% { stroke-dashoffset: $offset; }
+  50% {
+	stroke-dashoffset: $offset/4;
+	transform:rotate(135deg);
+  }
+  100% {
+	stroke-dashoffset: $offset;
+	transform:rotate(450deg);
+  }
+ }
