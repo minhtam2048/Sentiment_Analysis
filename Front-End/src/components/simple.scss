@@ -94,7 +94,7 @@ body {
 
 .emoji--haha {
 	&:after {
-		content: 'Tích cực';
+		content: 'Positive';
 	}
 
 	.emoji__face {
@@ -147,7 +147,7 @@ body {
 
 .emoji--sad {
 	&:after {
-		content: 'Tiêu cực';
+		content: 'Negative';
 	}
 
 	.emoji__face {

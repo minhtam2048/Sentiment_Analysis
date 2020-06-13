@@ -16,7 +16,8 @@ class SingleLine extends Component {
       dataToSend: null,
       dataRespond: null,
       content: "",
-      predict: 0.0,
+      trustNumber: 0.0,
+      predict: null,
       isLoading: false
     };
     this.handleChange = this.handleChange.bind(this);
@@ -51,7 +52,8 @@ class SingleLine extends Component {
 
       this.setState({
         dataRespond: data,
-        predict: data[0].resultInNumber,
+        trustNumber: data[0].resultInNumber,
+        predict: data[0].resultInBoolean,
         isLoading: false
       });
     }
@@ -77,31 +79,36 @@ class SingleLine extends Component {
           Predict
         </Button>
         {
-          this.state.predict === 0 ?
+          this.state.predict === null ?
           <div className="arrange-items">
             <EmojiHaHa/>
               {
               this.state.isLoading === true ? <span className="arrange-items"><Spinner/></span> :
-              <span className="arrange-items">{this.state.predict * 100}%</span>
+              <React.Fragment>
+              <span className="arrange-items">{this.state.trustNumber * 100}%</span>
+              </React.Fragment>
               }
             <EmojiSad/>
+              <div>reliability</div>
           </div> :
-          this.state.predict >= 0.5 ? 
+          this.state.predict === true ? 
           <div className="arrange-items">
             <EmojiHaHa/>
               {
                 this.state.isLoading === true ? <span className="arrange-items"><Spinner/></span> :
-              <span className="arrange-items">{this.state.predict * 100}%</span>
+              <span className="arrange-items">{this.state.trustNumber * 100}%</span>
               }
             <EmojiHaHa/>
+            <div>reliability</div>
           </div> :
           <div className="arrange-items">
           <EmojiSad/>
             {
               this.state.isLoading === true ? <span className="arrange-items"><Spinner/></span> :
-            <span className="arrange-items">{this.state.predict * 100}%</span>
+            <span className="arrange-items">{this.state.trustNumber * 100}%</span>
             }
           <EmojiSad/>
+          <div>Reliability</div>
           </div>
         }
         

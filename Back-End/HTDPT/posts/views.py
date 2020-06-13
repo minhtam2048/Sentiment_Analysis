@@ -74,13 +74,17 @@ def model_predict_comment(model,model_path,comment):
         comment_id_texts = text_to_sequences(comment_tokenizes_texts, word_map)
         comment_prediction = model.predict(comment_id_texts)
         # print('Comment Prediction : ',(comment_prediction > OPTIMAL_THRESHOLD).astype(np.float),2)
-        resultNumber = 1.0 - (comment_prediction[0][0]).astype(float)
-        resultNumber = round(resultNumber, 2)
+        trustNumber = (comment_prediction[0][0]).astype(float)
+        trustNumber = round(trustNumber, 2)
+        if trustNumber < 0.5:
+            trustNumber = 1.0 - trustNumber
+            trustNumber = round(trustNumber, 2)
+
         if (comment_prediction > OPTIMAL_THRESHOLD).astype(np.int8) == 1:
             resultBoolean = False
         else:
             resultBoolean = True
-    return resultNumber, resultBoolean
+    return trustNumber, resultBoolean
 
 # model_path = '/posts/SARNNKerasCPU 2020-05-05-09_05_15-version'
 
@@ -112,10 +116,10 @@ def post_list(request):
                 # print(i.get('content'))
                 str.append('*' + i.get('content') + '*')
                 # comment_list.append('*' + i.get('content') + '*')
-                resultNumber, resultBoolean = model_predict_comment (model_dict['SARNNKerasCPU'],model_path, str)
-                print(resultNumber)
+                trustNumber, resultBoolean = model_predict_comment (model_dict['SARNNKerasCPU'],model_path, str)
+                print(trustNumber)
                 print(resultBoolean)
-                i.update(resultInNumber=resultNumber)
+                i.update(resultInNumber=trustNumber)
                 i.update(resultInBoolean=resultBoolean)
 
             # model_predict_comment(model_dict['SARNNKerasCPU'],model_path,comment_list)
