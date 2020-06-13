@@ -12,3 +12,4 @@ python manage.py runserver 8000
 npm start
 
 * LƯU Ý : NHỚ THAY ĐỔI MODEL_PATH (HTDPT\posts\views.py) còn nếu để mặc định Disk E thì không cần lưu tâm.
+as
