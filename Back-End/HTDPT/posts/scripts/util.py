@@ -109,14 +109,32 @@ def make_embedding(texts, embedding_path, max_features):
     embedding_matrix[-1] = mean_embedding
     return embed_size, word_map, embedding_matrix
 
-def text_to_sequences(texts, word_map, max_len=DEFAULT_MAX_LENGTH):
+# def text_to_sequences(texts, word_map, max_len=DEFAULT_MAX_LENGTH):
+#     texts_id = []
+#     for sentence in texts:
+#         sentence = [word_map[word.lower()] for word in sentence][:max_len]
+#         padded_setence = np.pad(
+#             sentence, (0, max(0, max_len - len(sentence))), 'constant', constant_values=0)
+#         texts_id.append(padded_setence)
+#     return np.array(texts_id)
+def text_to_sequences(texts, word_map, max_len=DEFAULT_MAX_LENGTH,checkmap = False):
     texts_id = []
     for sentence in texts:
+        if(checkmap):
+            smap = []
+            for i in sentence :
+               print(i)
+               print("jbdjksdbvkj")
+               if (i in word_map):
+                   smap.append(i)
+            sentence = smap
+
         sentence = [word_map[word.lower()] for word in sentence][:max_len]
         padded_setence = np.pad(
             sentence, (0, max(0, max_len - len(sentence))), 'constant', constant_values=0)
         texts_id.append(padded_setence)
     return np.array(texts_id)
+
 
 def find_threshold(pred_proba, y_true, metric = f1_score):
     cur_acc = 0
