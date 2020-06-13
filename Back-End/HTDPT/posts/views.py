@@ -71,7 +71,7 @@ def model_predict_comment(model,model_path,comment):
     model.load_weights('{}/models.hdf5'.format(model_path))
     if len(comment) !=0 :
         comment_tokenizes_texts = tokenize(comment)
-        comment_id_texts = text_to_sequences(comment_tokenizes_texts, word_map)
+        comment_id_texts = text_to_sequences(comment_tokenizes_texts, word_map,checkmap=True)
         comment_prediction = model.predict(comment_id_texts)
         # print('Comment Prediction : ',(comment_prediction > OPTIMAL_THRESHOLD).astype(np.float),2)
         trustNumber = (comment_prediction[0][0]).astype(float)
