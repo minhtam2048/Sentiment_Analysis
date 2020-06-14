@@ -18,14 +18,27 @@ class SingleLine extends Component {
       content: "",
       trustNumber: 0.0,
       predict: null,
-      isLoading: false
+      isLoading: false,
+      language: 'vietnamese'
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleVietnameseSubmit = this.handleVietnameseSubmit.bind(this);
+    this.handleJapaneseSubmit = this.handleJapaneseSubmit.bind(this);
   }
 
   handleChange(e) {
     this.setState({ content: e.target.value });
+  }
+
+  handleVietnameseSubmit() {
+    this.setState({ language: 'vietnamese'});
+    console.log(this.state.language)
+  }
+
+  handleJapaneseSubmit() {
+    this.setState({ language: 'japanese'});
+    console.log(this.state.language)
   }
 
   async handleSubmit(e) {
@@ -38,26 +51,20 @@ class SingleLine extends Component {
     } else {
       this.setState({isLoading: true })
       dataToSend = JSON.parse(
-        `[{"content": "${this.state.content}", "resultInNumber": 0.1, "resultInBoolean": false}]`
+        `{"language": "${this.state.language}","posts": [{"content": "${this.state.content}", "resultInNumber": 0.1, "resultInBoolean": false}]}`
       );
 
-      // this.setState({
-      //   dataToSend: data
-      // });
-
-      // console.log(this.state.dataToSend)
+     
 
       let { data } = await httpCommon(dataToSend);
-      console.log(data[0].resultInNumber);
 
       this.setState({
         dataRespond: data,
-        trustNumber: data[0].resultInNumber,
-        predict: data[0].resultInBoolean,
+        trustNumber: data.posts[0].resultInNumber,
+        predict: data.posts[0].resultInBoolean,
         isLoading: false
       });
     }
-    // console.log(this.state.dataRespond);
   }
 
   render() {
@@ -78,6 +85,10 @@ class SingleLine extends Component {
         >
           Predict
         </Button>
+        <div>
+          <Button className="custom-button" onClick={this.handleVietnameseSubmit}>vi</Button>
+          <Button className="custom-button" onClick={this.handleJapaneseSubmit}>jp</Button>
+        </div>
         {
           this.state.predict === null ?
           <div className="arrange-items">
